@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>websocket连接测试</title>
+	<script src="js/jquery-1.11.3.min.js" type="text/javascript"></script>
+	
+</head>
+<body>
+<br/><br/>
+<br/><br/>
+	<div id='local-test-sl'>ws://localhost//socket-ydyHl/hlWs?token=kkkkkkkkkk</div><br/>
+	<div id='local-test-jl'>ws://localhost/socket-jl/hbJl?token=</div><br/>
+	<input type="text" id='ws-url' name='wsUrl'style='width:800px;height:30ps;'/>
+	<button id='create-ws' onclick="initWs()">创建长连接</button>
+	<br/><br/><br/>
+	<input type="text" id='send-param' name='sendParam' style='width:800px;height:30ps;'/>
+	<button id='send-ws'onclick='sendMsg()'>发送参数</button>
+	<br/><br/><br/><br/>
+	<button id='cleam-msg'onclick='cleanMsg()'>清空</button>
+	详细 
+	<div id="messages"></div>
+	
+	
+	<script type="text/javascript">
+	
+		function cleanMsg(){
+		
+			var div = document.getElementById("messages");
+			while(div.hasChildNodes()) //当div下还存在子节点时 循环继续
+			{
+				div.removeChild(div.firstChild);
+			}
+
+		}
+		
+		
+   		var webSocket;
+		
+		function initWs(){
+			console.log("document.getElementById('ws-url') : " + document.getElementById('ws-url'));
+		
+			var url = document.getElementById('ws-url').value
+			
+			console.log("url : " + new Date() + " | " +  url);
+			
+			webSocket = new WebSocket(url);
+
+			webSocket.onerror = function(event) {
+				
+				console.log('event.data : ' + event.data);
+				var span = document.createElement("span");
+				span.innerHTML = new Date + ':连接出错';
+				document.getElementById('messages').appendChild(document.createElement("br"));
+				document.getElementById('messages').appendChild(span);
+			};
+
+			webSocket.onopen = function(event) {
+				var span = document.createElement("span");
+				span.innerHTML =new Date + ':连接成功';
+				document.getElementById('messages').appendChild(document.createElement("br"));
+				document.getElementById('messages').appendChild(span);
+			};
+
+			webSocket.onmessage = function(event) {
+				var span = document.createElement("span");
+				span.innerHTML = new Date + ":"+ event.data;
+				document.getElementById('messages').appendChild(document.createElement("br"));
+				document.getElementById('messages').appendChild(span);
+			};
+
+			webSocket.onclose = function(event) {
+				var span = document.createElement("span");
+				span.innerHTML = new Date +  ":关闭连接";
+				document.getElementById('messages').appendChild(document.createElement("br"));
+				document.getElementById('messages').appendChild(span);
+			};
+			
+		}
+		
+		
+		function sendMsg(){
+		
+			var sendParam = document.getElementById('send-param').value	
+			console.log("send : " + new Date()  + " | " +  sendParam);
+			webSocket.send(sendParam);
+			
+		}
+		
+		$("#local-test-sl").click(function(){
+				console.log('local-test-text' + $("#local-test-sl").text());
+				$("#ws-url").val($("#local-test-sl").text());
+		
+		});
+		
+		$("#local-test-jl").click(function(){
+				console.log('local-test-text' + $("#local-test-jl").text());
+				$("#ws-url").val($("#local-test-jl").text());
+		
+		});
+		
+
+	</script>
+</body>
+</html>

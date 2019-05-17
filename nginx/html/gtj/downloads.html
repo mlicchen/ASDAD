@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>下载</title>
+	<link rel="stylesheet" type="text/css" href="css/downloads.css" />
+</head>
+
+<body>
+	<div class="wrap">
+		<a href="javascript:;" class="btn" id="btn">
+			<img src="imgs/iphone.png" alt="">
+		</a>
+		<a href="javascript:;" class="btn2" id="btn2">
+			<img src="imgs/android.png" alt="">
+		</a>
+	</div>
+	<div id="weixin-tip">
+		<p>
+			<img src="imgs/tip.png" alt="" />
+			<span id="close" title="关闭" class="close">x</span>
+		</p>
+	</div>
+
+	<script type="text/javascript">
+		(function (doc, win) {
+			var docEl = doc.documentElement,
+				recalc = function () {
+					var clientHeight = docEl.clientHeight;
+					if (!clientHeight) return;
+					docEl.style.fontSize = 100 * (clientHeight / 568) + 'px';
+				};
+			recalc()
+		})(document, window);
+		var is_weixin = (function () { return navigator.userAgent.toLowerCase().indexOf('micromessenger') !== -1 })();
+		window.onload = function () {
+			var btn = document.getElementById('btn');
+			var btn2 = document.getElementById('btn2');
+			var tip = document.getElementById('weixin-tip');
+			var close = document.getElementById('close');
+			if (is_weixin) {
+				btn.onclick = function (e) {
+					tip.style.display = 'block';
+					return false;
+				}
+				btn2.onclick = function (e) {
+					tip.style.display = 'block';
+					return false;
+				}
+				close.onclick = function () {
+					tip.style.display = 'none';
+				}
+			} else {
+				// btn.setAttribute('href', 'https://fir.im/depf')
+				// btn2.setAttribute('href', 'https://fir.im/f4y5')
+
+				btn.setAttribute('href', 'http://www.118fenfa.cn/flpvrn')
+				btn2.setAttribute('href', 'http://www.118fenfa.cn/tnxkwd')
+			}
+		}
+	</script>
+</body>
+
+</html>

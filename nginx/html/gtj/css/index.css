@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background-repeat: no-repeat;
+  background-size: cover;
+  overflow: auto;
+}
+
+input {
+  font-size: 14px;
+  border: none;
+  outline: 0;
+  -webkit-appearance: none;
+  background-color: transparent;
+  color: inherit;
+  height: 35px;
+  padding-left: 10px;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border-radius: 4px;
+  min-width: 100px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.wrap {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 10px 20px;
+}
+
+.wrap>div {
+  margin-bottom: 10px;
+}
+
+.wrap .list {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #24e1ba;
+}
+
+.wrap .list label {
+  width: 70px;
+  text-align: left;
+}
+
+.wrap .list input {
+  flex: 1;
+}
+
+.wrap .list select {
+  height: 30px;
+  margin-bottom: 5px;
+  margin-left: 10px;
+}
+
+.wrap .list a {
+  width: 100px;
+  height: 25px;
+  text-align: center;
+  line-height: 25px;
+  background: #1dbdae;
+  color: #fff;
+  margin-left: 10px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+.wrap .list a.active {
+  background: #ccc;
+}
+
+.wrap .next,
+.wrap .check-pay,
+.wrap .delete {
+  display: block;
+  width: 100%;
+  background: #1dbdae;
+  text-align: center;
+  height: 40px;
+  line-height: 40px;
+  text-indent: none;
+  color: #fff;
+  border-radius: 5px;
+  margin: 10px 0;
+}
+
+.wrap .next.active {
+  background: #ccc;
+}
+
+.dwonload-btn {
+  background: blue;
+}
+
+.pay-list .item-t {
+  padding: 5px 2px;
+  border-bottom: 1px solid #eee;
+}
+
+.pay-list .item-b {
+  align-items: center;
+  padding: 5px 2px;
+}
+
+.pay-list .item-b .rt {
+  line-height: 25px;
+}
+
+.pay-list .item-btn {
+  border-top: 1px solid #eee;
+  text-align: right;
+}
+
+.pay-list {
+  background: #FFFFFF;
+  overflow: hidden;
+  margin-top: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  padding: 0 5px;
+}
+
+.layui-m-layercont>div {
+  margin-bottom: 15px;
+  border-bottom: 1px solid #d1d1d1;
+  display: flex;
+  text-align: left;
+  align-items: center;
+}
+
+.layui-m-layercont>div label {
+  width: 50px;
+}
+
+.layui-m-layercont>div input {
+  flex: 1;
+}

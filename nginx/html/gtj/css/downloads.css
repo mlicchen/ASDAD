@@ -1,0 +1,139 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: #1dbdae;
+  background: #1dbdae;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+.wrap {
+  width: 100%;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrap h2 {
+  margin-left: 20px;
+  margin-bottom: 12px;
+}
+
+.wrap h5 {
+  font-size: 18px;
+  text-align: center;
+}
+
+.wrap p {
+  font-size: 14px;
+  text-align: center;
+}
+
+.wrap>img {
+  display: block;
+  margin: 0.38rem auto;
+  height: 1.12rem;
+}
+
+.wrap>a {
+  display: block;
+}
+
+.wrap>a>img {
+  display: block;
+  margin: 0.2rem auto;
+  height: 0.38rem;
+}
+
+/* .wrap a {
+    margin: 30px auto;
+    left: 24%;
+    display: block;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #fff;
+    text-indent: 2em;
+} */
+
+#weixin {
+  background: url(../imgs/android.png)no-repeat 20px 5px;
+}
+
+#ios {
+  background: #34c699 url(../image/ios.png)no-repeat 20px 5px;
+}
+
+/* @media only screen and (min-width: 320px) {
+    .wrap>img {
+        margin: 38px auto;
+    }
+    .wrap a {
+        bottom: 50px;
+        left: 20%;
+    }
+}
+
+@media only screen and (min-width: 375px) {
+    .wrap a {
+        bottom: 60px;
+        left: 25%;
+        margin: 30px auto;
+    }
+}
+
+@media only screen and (min-width: 414px) {
+    .wrap>img {
+        margin: 60px auto;
+    }
+} */
+
+/*微信*/
+
+#weixin-tip {
+  display: none;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: rgba(0, 0, 0, 0.8);
+  filter: alpha(opacity=80);
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+}
+
+#weixin-tip img {
+  width: 100%;
+}
+
+#weixin-tip p {
+  text-align: center;
+  margin-top: 10%;
+  padding: 0 5%;
+  position: relative;
+}
+
+#weixin-tip .close {
+  color: #fff;
+  padding: 5px;
+  font: bold 20px/24px simsun;
+  text-shadow: 0 1px 0 #ddd;
+  position: absolute;
+  top: 0;
+  left: 5%;
+}

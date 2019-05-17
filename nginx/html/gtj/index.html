@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+  <title>注册</title>
+  <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script type="text/javascript" src="layer/mobile/layer.js"></script>
+  <script type="text/javascript" src="js/MD5.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      /*ajax封装*/
+      var ajax = {
+        post: function (loading, url, data, successCb) {
+          if (loading) {
+            var index = layer.open({
+              type: 2
+              , content: '加载中'
+            })
+          }
+          $.ajax({ // 开始识别
+            type: "POST",
+            contentType: "application/json; charset=utf-8",
+            url: url,
+            data: JSON.stringify(setSign(data)),
+            dataType: "json",
+            success: function (req) {
+              if (loading) layer.close(index)
+              successCb && successCb(req)
+            }
+          })
+        }
+      }
+      /*获取验证码*/
+      var time = 60
+      var canCode = true
+      $('#getCode').click(function () {
+        if (!canCode) {
+          return false
+        }
+        /*发送验证*/
+        if (/^1[3|4|5|6|7|8|9][0-9]{9}$/.test($('#phone').val())) {
+          ajax.post(false, '/gtj-restful/base/sms/smsCode', { appKey: 'h5', type: '1', phone: $('#phone').val() }, function (req) {
+            layer.open({
+              content: req.message
+              , btn: '我知道了'
+            })
+          })
+          canCode = false
+          var self = $(this)
+          self.text(time + 's').addClass('active')
+          timer = setInterval(function () {
+            time--
+            self.text(time + 's')
+            if (time <= 0) {
+              self.text('获取验证码').removeClass('active')
+              canCode = true
+              time = 60
+              clearInterval(timer)
+            }
+          }, 1000)
+        } else {
+          layer.open({
+            content: '手机号码格式错误！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        }
+      })
+      // /*点击注册*/
+      $('.next').click(function () {
+        if (!/^1[3|4|5|7|8|9][0-9]{9}$/.test($('#phone').val())) {
+          layer.open({
+            content: '手机号码格式错误！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        } else if ($('#password').val() === '') {
+          layer.open({
+            content: '密码不能为空！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        } else if ($('#confirmPassword').val() === '') {
+          layer.open({
+            content: '确认密码不能为空！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        } else if ($('#password').val() !== $('#confirmPassword').val()) {
+          layer.open({
+            content: '两次密码不一致！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        } else if (!/^\d{6}$/.test($('#code').val())) {
+          layer.open({
+            content: '验证码格式错误！'
+            , skin: 'msg'
+            , time: 2 //2秒后自动关闭
+          })
+        } else {
+          /*注册信息验证*/
+          ajax.post(true, '/gtj-restful/user/login/register', { appKey: 'h5', parentCode: commom.getUrlParam('parentCode'), phone: $('#phone').val(), password: $('#password').val(), confirmPassword: $('#confirmPassword').val(), code: $('#code').val() }, function (req) {
+            if (req.result == '1') {
+              layer.open({
+                content: req.message
+                , btn: '我知道了',
+                yes: function () {
+                  location.href = './downloads.html'
+                }
+              })
+            } else {
+              layer.open({
+                content: req.message
+                , btn: '我知道了'
+              })
+            }
+          })
+        }
+      })
+    })
+  </script>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+  <div class="wrap">
+    <div class="list">
+      <label for="phone">手机号</label>
+      <input type="tel" id="phone" placeholder="请输入手机号">
+    </div>
+    <div class="list">
+      <label for="code">验证码</label>
+      <input type="number" id="code" placeholder="请输入验证码">
+      <a href="javascript:;" id="getCode">获取验证码</a>
+    </div>
+    <div class="list">
+      <label for="password">密码</label>
+      <input type="password" id="password" placeholder="请输入密码">
+    </div>
+    <div class="list">
+      <label for="confirmPassword">确认密码</label>
+      <input type="password" id="confirmPassword" placeholder="请确认密码">
+    </div>
+    <a href="javascript:;" class="next">注&emsp;&emsp;册</a>
+    <br />
+    <a href="downloads.html" class="next" style="backgroupnd: blue!important;">下&emsp;&emsp;载</a>
+  </div>
+</body>
+
+</html>
